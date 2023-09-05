@@ -51,6 +51,12 @@ body {
     text-align: end;
 }
 
+
+.ant-menu li {
+    list-style-type: none;
+    margin-inline: 0px !important;
+}
+
 .loding {
     display: flex;
     justify-content: center;

@@ -30,8 +30,6 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization.Default
                     return;
                 }
 
-
-
                 if (context.User.Identity.AuthenticationType == "NTLM")
                 {
                     await context.WindowsAuthentication(requirement, _userService, IsActiveEmployee);

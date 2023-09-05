@@ -8,15 +8,13 @@ export const Home = () => {
 
   const fetchData = async () => {
     let url = `${API_URI.AppMenu}`;
-    let data = await fetch("api/Logger");
+    let data = await fetch("api/appmenu");
     console.log("Home data : ", data.json());
   }
 
   return (
     <div>
-      <Button type="primary" size={"large"} onClick={fetchData}>
-        Fetch Menu
-      </Button>
+      <h2>Welcome to the hackthon!</h2>
     </div>
   )
 }

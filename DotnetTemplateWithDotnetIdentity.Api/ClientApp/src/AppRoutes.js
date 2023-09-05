@@ -7,8 +7,6 @@ import { Home } from './pages/Home';
 import { UserDetails } from './pages/UserDetails';
 import { UserList } from './pages/UserList';
 
-console.log("ApiAuthorzationRoutes : ", ApiAuthorzationRoutes);
-
 const AppRoutes = [
   {
     index: true,

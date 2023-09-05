@@ -7,12 +7,11 @@ export const PAGE_PATHS = {
     ActivityLogs: { path: "/activitylogs", label: "Activity Logs" },
     UserDetails: { path: "/details", label: "User Details" },
     AppConfig: { path: "/appconfig", label: "App Config" },
-    UserList: { path: "/", label: "User List" },
-    UserListTwo: { path: "/user", label: "User List" }
+    UserList: { path: "/user", label: "User List" }
 };
 
 export const API_URI = {
-    Employee: '/api/User',
+    Users: '/api/User',
     ActivityLogs: '/api/Logger',
     ErrorLogs: '/api/Logger/error',
     AppMenu: '/api/AppMenu'

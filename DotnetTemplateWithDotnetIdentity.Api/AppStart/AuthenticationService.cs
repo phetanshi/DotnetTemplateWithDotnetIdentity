@@ -16,12 +16,18 @@ namespace DotnetTemplateWithDotnetIdentity.Api.AppStart
         }
         private static void AddFormsAuthentication(this IServiceCollection services, IConfiguration config)
         {
-            services.AddAuthentication().AddIdentityServerJwt();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://localhost:44459";
+                    options.Audience = "DotnetTemplateWithDotnetIdentity.ApiAPI";
+                })
+                .AddIdentityServerJwt();
         }
         private static void AddAzureAd(this IServiceCollection services, IConfiguration config)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
         }
         private static void AddWindowsAuthentication(this IServiceCollection services, IConfiguration config)
         {

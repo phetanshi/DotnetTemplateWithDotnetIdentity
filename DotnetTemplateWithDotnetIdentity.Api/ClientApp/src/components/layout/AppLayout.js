@@ -1,37 +1,32 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Button, Layout, Menu, theme, Card, Switch, Space, Typography } from 'antd';
-import { Container } from 'reactstrap';
-import { NavMenu } from '../NavMenu';
-import { USER_THEMES, BASE_URI, PAGE_PATHS, API_URI } from '../../config';
-import { getMenu, getMenuItems } from '../../util/utility';
+import React, { useEffect, useState } from 'react';
+import { Layout, Menu, theme, Typography } from 'antd';
+import { USER_THEMES, BASE_URI, API_URI } from '../../config';
+import { getMenu } from '../../util/utility';
 import { HeaderLayout } from './HeaderLayout';
 import { useNavigate } from "react-router-dom";
 import authService from '../api-authorization/AuthorizeService';
-import { ApplicationPaths } from '../api-authorization/ApiAuthorizationConstants';
 import { getApiData } from '../api-services/fetchHelpers';
+import { HomeOutlined } from '@ant-design/icons';
 
-const { Header, Sider, Footer, Content } = Layout;
+const { Sider, Footer, Content } = Layout;
 
-const getData = async (setAppMenu) => {
-  const token = await authService.getAccessToken();
-  let url = `${API_URI.AppMenu}`
-  const response = await fetch('api/AppMenu?_=t', {
-    headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-  });
-  const data = await response.json();
-  let menu = getMenu(data);
-  setAppMenu(menu);
-}
-
-const getLoginInfo = async (setAppMenu, setuserName, setLoginUser, setIsAuthn) => {
+const getLoginInfo = async (setAppMenu, setuserName, setLoginUser, setIsAuthn, setOpenKeys) => {
   let isAuth = await authService.isAuthenticated();
-  console.log("isAuth : ", isAuth);
   setIsAuthn(isAuth);
   if (isAuth) {
     let user = await authService.getUser();
+    let url = `${BASE_URI}${API_URI.AppMenu}`;
+    let data = await getApiData(url);
+    let menus = getMenu(data?.payload);
+    let keys = menus.map(s => s.key);
+    let homeMenu = [{ key: '/', label: 'Home', icon: <HomeOutlined /> }];
+    let items = homeMenu.concat(menus);
+    setAppMenu(items);
+    console.log("App Menu One : ", items);
+
     setuserName(`${user.first_name} ${user.last_name}`);
     setLoginUser(user);
-    getData(setAppMenu);
+    setOpenKeys(keys);
   }
 }
 
@@ -42,6 +37,7 @@ export const AppLayout = (props) => {
   const [userName, setuserName] = useState('Gust');
   const [collapsed, setCollapsed] = useState(false);
   const [AppMenu, setAppMenu] = useState([]);
+  const [openKeys, setOpenKeys] = useState([]);
 
   const navigate = useNavigate();
   const { 
@@ -55,16 +51,12 @@ export const AppLayout = (props) => {
 
   useEffect(() => {
     let isCancelled = false;
-    getLoginInfo(setAppMenu, setuserName, setLoginUser, setIsAuthn);
+    getLoginInfo(setAppMenu, setuserName, setLoginUser, setIsAuthn, setOpenKeys);
     return () => {
       isCancelled = true;
     }
-  }, [getMenu, authService.isAuthenticated, authService.getUser]);
-    
-  console.log("IsDarkTheme App Layout : ", IsDarkTheme);
-  console.log("collapsed App Layout : ", collapsed);
-
-
+  }, [getLoginInfo]);
+  
   return (
     <Layout>
       <Typography>
@@ -86,10 +78,11 @@ export const AppLayout = (props) => {
                     </div> */}
             <Menu
               mode="inline"
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={['/']}
               onClick={({ key }) => {
                 navigate(key);
               }}
+              openKeys={openKeys}
               items={AppMenu}
               theme={IsDarkTheme ? 'dark' : 'light'}
               style={{ background: colorBgContainer }}
@@ -115,20 +108,3 @@ export const AppLayout = (props) => {
     </Layout>
   )
 }
-
-
-
-// export class Layout extends Component {
-//   static displayName = Layout.name;
-
-//   render() {
-//     return (
-//       <div>
-//         <NavMenu />
-//         <Container tag="main">
-//           {this.props.children}
-//         </Container>
-//       </div>
-//     );
-//   }
-// }
