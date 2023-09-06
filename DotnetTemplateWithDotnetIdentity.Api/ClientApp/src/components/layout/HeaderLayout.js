@@ -70,7 +70,7 @@ export const HeaderLayout = (props) => {
                       <Switch size="small" checked={IsDarkTheme} checkedChildren={USER_THEMES.Dark}
                           unCheckedChildren={USER_THEMES.Light} onChange={(checked) => setIsDarkTheme(checked)} />
                   </div>
-                  {IsAuthn &&
+                  {IsAuthn && userName !== "Gust" &&
                       <>
                           <p style={{ color: headerTextColor, marginBottom: "0px" }}>Hello, {userName}!</p>
                       <NavLink replace tag={Link} to={ApplicationPaths.LogOut} state={logoutState}>
@@ -87,7 +87,7 @@ export const HeaderLayout = (props) => {
                       </NavLink>
                       </>
                   }
-                  {!IsAuthn &&
+                  {(!IsAuthn || userName === "Gust") &&
                       <>
                           <Button type="link"
                               style={{ fontSize: '16px', color: headerTextColor }}
