@@ -339,43 +339,6 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Util
             {
                 appDbContext.Database.EnsureCreated();
                 appDbContext.Database.Migrate();
-
-                //if (!appDbContext.Users.Any())
-                //{
-                //    appDbContext.Users.AddRange(GetUserInitialDataSet());
-                //}
-
-                //if(!appDbContext.AppRoles.Any())
-                //{
-                //    appDbContext.AppRoles.AddRange(GetAppRoleInitalDataSet());
-                //}
-
-                //if (!appDbContext.AppMenuGroups.Any())
-                //{
-                //    appDbContext.AppMenuGroups.AddRange(GetAppMenuGroupInitalDataSet());
-                //}
-
-                //if (!appDbContext.AppMenuItems.Any())
-                //{
-                //    appDbContext.AppMenuItems.AddRange(GetAppMenuItemInitalDataSet());
-                //}
-
-                //if (!appDbContext.AppRoleMenuMappings.Any())
-                //{
-                //    appDbContext.AppRoleMenuMappings.AddRange(GetAppRoleMenuMappingInitalDataSet());
-                //}
-
-                //if (!appDbContext.AppUserRoleMappings.Any())
-                //{
-                //    appDbContext.AppUserRoleMappings.AddRange(GetAppUserRoleMappingInitalDataSet());
-                //}
-
-                //if (!appDbContext.AppConfigs.Any())
-                //{
-                //    appDbContext.AppConfigs.AddRange(GetAppConfigInitalDataSet());
-                //}
-
-                //appDbContext.SaveChanges();
             }
         }
     }
