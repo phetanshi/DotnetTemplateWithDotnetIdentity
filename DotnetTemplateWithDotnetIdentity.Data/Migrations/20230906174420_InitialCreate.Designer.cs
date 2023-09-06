@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230904140417_InitalCreate")]
-    partial class InitalCreate
+    [Migration("20230906174420_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             ConfigValue = "NTLM",
                             IsActive = true,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3443)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6355)
                         });
                 });
 
@@ -235,7 +235,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3356)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6291)
                         },
                         new
                         {
@@ -244,7 +244,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3367)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6297)
                         },
                         new
                         {
@@ -253,7 +253,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3369)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6298)
                         },
                         new
                         {
@@ -262,7 +262,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 2,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3370)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6300)
                         },
                         new
                         {
@@ -271,7 +271,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 2,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3372)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6301)
                         },
                         new
                         {
@@ -280,7 +280,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 3,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3374)
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6303)
                         });
                 });
 
@@ -320,7 +320,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3406),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6325),
                             UserId = 1
                         },
                         new
@@ -329,7 +329,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 2,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3409),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6327),
                             UserId = 2
                         },
                         new
@@ -338,7 +338,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 3,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3411),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6329),
                             UserId = 3
                         },
                         new
@@ -347,7 +347,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3412),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6330),
                             UserId = 4
                         },
                         new
@@ -356,7 +356,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3413),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6331),
                             UserId = 5
                         },
                         new
@@ -365,7 +365,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                             AppRoleId = 1,
                             IsActive = false,
                             UpdatedBy = "seeder",
-                            UpdatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3416),
+                            UpdatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6332),
                             UserId = 6
                         });
                 });
@@ -428,7 +428,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 1,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3176),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6116),
                             Email = "ps-admin@padmasekhar.com",
                             FirstName = "Admin",
                             IsActive = true,
@@ -439,7 +439,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 2,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3186),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6121),
                             Email = "app-support@padmasekhar.com",
                             FirstName = "Padmasekhar",
                             IsActive = true,
@@ -450,7 +450,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 3,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3189),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6122),
                             Email = "padmasekhar.ps@outlook.com",
                             FirstName = "Padmasekhar",
                             IsActive = true,
@@ -461,7 +461,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 4,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3191),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6124),
                             Email = "PADMASEKHAR-NEW\\padma",
                             FirstName = "Padmasekhar",
                             IsActive = true,
@@ -472,7 +472,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 5,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3193),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6126),
                             Email = "ayush-ss@padmasekhar.com",
                             FirstName = "Ayush",
                             IsActive = true,
@@ -483,7 +483,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                         {
                             UserId = 6,
                             CreatedBy = "seeder",
-                            CreatedDate = new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3198),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6129),
                             Email = "sumuk@padmasekhar.com",
                             FirstName = "Sumukh",
                             IsActive = true,

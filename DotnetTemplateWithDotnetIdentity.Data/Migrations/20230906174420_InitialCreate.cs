@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -165,7 +165,7 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
             migrationBuilder.InsertData(
                 table: "tblAppConfigs",
                 columns: new[] { "ConfigId", "ConfigKey", "ConfigValue", "IsActive", "UpdatedBy", "UpdatedDate" },
-                values: new object[] { 1, "AuthType", "NTLM", true, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3443) });
+                values: new object[] { 1, "AuthType", "NTLM", true, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6355) });
 
             migrationBuilder.InsertData(
                 table: "tblAppMenuGroups",
@@ -192,12 +192,12 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                 columns: new[] { "UserId", "ContactNumber", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsActive", "LastName", "ManagerId", "MiddleName", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3176), "ps-admin@padmasekhar.com", "Admin", true, "User", null, null, null, null, "ps-admin@padmasekhar.com" },
-                    { 2, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3186), "app-support@padmasekhar.com", "Padmasekhar", true, "Pottepalem", null, null, null, null, "app-support@padmasekhar.com" },
-                    { 3, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3189), "padmasekhar.ps@outlook.com", "Padmasekhar", true, "Pottepalem", null, null, null, null, "padmasekhar.ps@outlook.com" },
-                    { 4, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3191), "PADMASEKHAR-NEW\\padma", "Padmasekhar", true, "Windows", null, null, null, null, "PADMASEKHAR-NEW\\padma" },
-                    { 5, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3193), "ayush-ss@padmasekhar.com", "Ayush", true, "Jah", null, null, null, null, "ayush-ss@padmasekhar.com" },
-                    { 6, null, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3198), "sumuk@padmasekhar.com", "Sumukh", true, "S", null, null, null, null, "sumuk@padmasekhar.com" }
+                    { 1, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6116), "ps-admin@padmasekhar.com", "Admin", true, "User", null, null, null, null, "ps-admin@padmasekhar.com" },
+                    { 2, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6121), "app-support@padmasekhar.com", "Padmasekhar", true, "Pottepalem", null, null, null, null, "app-support@padmasekhar.com" },
+                    { 3, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6122), "padmasekhar.ps@outlook.com", "Padmasekhar", true, "Pottepalem", null, null, null, null, "padmasekhar.ps@outlook.com" },
+                    { 4, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6124), "PADMASEKHAR-NEW\\padma", "Padmasekhar", true, "Windows", null, null, null, null, "PADMASEKHAR-NEW\\padma" },
+                    { 5, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6126), "ayush-ss@padmasekhar.com", "Ayush", true, "Jah", null, null, null, null, "ayush-ss@padmasekhar.com" },
+                    { 6, null, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6129), "sumuk@padmasekhar.com", "Sumukh", true, "S", null, null, null, null, "sumuk@padmasekhar.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -216,12 +216,12 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                 columns: new[] { "AppRoleMenuMappingId", "AppMenuGroupId", "AppRoleId", "IsActive", "UpdatedBy", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3356) },
-                    { 2, 2, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3367) },
-                    { 3, 3, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3369) },
-                    { 4, 2, 2, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3370) },
-                    { 5, 3, 2, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3372) },
-                    { 6, 3, 3, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3374) }
+                    { 1, 1, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6291) },
+                    { 2, 2, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6297) },
+                    { 3, 3, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6298) },
+                    { 4, 2, 2, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6300) },
+                    { 5, 3, 2, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6301) },
+                    { 6, 3, 3, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6303) }
                 });
 
             migrationBuilder.InsertData(
@@ -229,12 +229,12 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Migrations
                 columns: new[] { "AppUserRoleMappingId", "AppRoleId", "IsActive", "UpdatedBy", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3406), 1 },
-                    { 2, 2, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3409), 2 },
-                    { 3, 3, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3411), 3 },
-                    { 4, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3412), 4 },
-                    { 5, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3413), 5 },
-                    { 6, 1, false, "seeder", new DateTime(2023, 9, 4, 14, 4, 17, 373, DateTimeKind.Utc).AddTicks(3416), 6 }
+                    { 1, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6325), 1 },
+                    { 2, 2, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6327), 2 },
+                    { 3, 3, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6329), 3 },
+                    { 4, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6330), 4 },
+                    { 5, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6331), 5 },
+                    { 6, 1, false, "seeder", new DateTime(2023, 9, 6, 17, 44, 20, 492, DateTimeKind.Utc).AddTicks(6332), 6 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,7 +1,10 @@
 ﻿using Application.Dtos;
 using Application.Dtos.Enum;
+using DotnetTemplateWithDotnetIdentity.Api.Areas.Identity.Data;
 using DotnetTemplateWithDotnetIdentity.Api.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace DotnetTemplateWithDotnetIdentity.Api.Authorization.Admin
 {
@@ -9,13 +12,15 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization.Admin
     {
         private readonly IWebHostEnvironment _env;
         private readonly IUserService _userService;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IUserRoleService _userRoleService;
         private readonly IAppConfigService _appConfigService;
 
-        public AdminAuthorizationHandler(IWebHostEnvironment env, IUserService userService, IUserRoleService userRoleService, IAppConfigService appConfigService)
+        public AdminAuthorizationHandler(IWebHostEnvironment env, IUserService userService, UserManager<AppUser> userManager, IUserRoleService userRoleService, IAppConfigService appConfigService)
         {
             _env = env;
-            _userService = userService;
+            this._userService = userService;
+            _userManager = userManager;
             _userRoleService = userRoleService;
             _appConfigService = appConfigService;
         }
@@ -31,21 +36,12 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization.Admin
 
                 if (context.User.Identity.AuthenticationType == "NTLM")
                 {
-                    await context.WindowsAuthentication(requirement, _userService, IsSuperAdmin);
+                    await context.WindowsAuthentication(requirement, IsSuperAdmin);
                 }
                 else
                 {
-                    await context.AzureAdAuthentication(requirement, _userService, IsSuperAdmin);
+                    await context.BearerTokenAuthentication(requirement, _userService, IsSuperAdmin);
                 }
-
-                //if (_env.EnvironmentName.ToLower() == "development")
-                //{
-                //    await context.WindowsAuthentication(requirement, _userService, IsSuperAdmin);
-                //}
-                //else
-                //{
-                //    await context.AzureAdAuthentication(requirement, _userService, IsSuperAdmin);
-                //}
             }
             catch (Exception ex)
             {
@@ -54,10 +50,21 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization.Admin
             }
         }
 
-        private async Task<bool> IsSuperAdmin(int userId)
+        private async Task<bool> IsSuperAdmin(string email)
         {
-            List<UserRoleMappingDto> config = await _userRoleService.GetAsync(userId);
-            return config.FirstOrDefault(x => x.UserId == userId && x.AppRoleId == AppRoleEnum.Admin) == null ? false : true;
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null) return false;
+
+            var claims = await _userManager.GetClaimsAsync(user);
+
+            var roleClaim = claims.FirstOrDefault(x => (x.Type == AppClaimTypes.ROLE_CLAIM_TYPE
+                                                        && (x.Value == AppClaimTypes.ADMIN_ROLE_CLAIM)));
+
+            if (roleClaim == null)
+                return false;
+
+            return true;
         }
     }
 }

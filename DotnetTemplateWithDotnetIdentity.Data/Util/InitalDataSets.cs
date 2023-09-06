@@ -1,5 +1,6 @@
 ﻿using DotnetTemplateWithDotnetIdentity.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotnetTemplateWithDotnetIdentity.Data.Util
 {
@@ -328,6 +329,54 @@ namespace DotnetTemplateWithDotnetIdentity.Data.Util
             modelBuilder.Entity<AppRoleMenuMapping>().HasData(GetAppRoleMenuMappingInitalDataSet());
             modelBuilder.Entity<AppUserRoleMapping>().HasData(GetAppUserRoleMappingInitalDataSet());
             modelBuilder.Entity<AppConfig>().HasData(GetAppConfigInitalDataSet());
+        }
+
+        public static void SeedAppDatabase(this IServiceProvider serviceProvider)
+        {
+            var scope = serviceProvider.CreateScope();
+            var appDbContext = scope.ServiceProvider.GetService<AppDbContext>();
+            if (appDbContext != null)
+            {
+                appDbContext.Database.EnsureCreated();
+                appDbContext.Database.Migrate();
+
+                //if (!appDbContext.Users.Any())
+                //{
+                //    appDbContext.Users.AddRange(GetUserInitialDataSet());
+                //}
+
+                //if(!appDbContext.AppRoles.Any())
+                //{
+                //    appDbContext.AppRoles.AddRange(GetAppRoleInitalDataSet());
+                //}
+
+                //if (!appDbContext.AppMenuGroups.Any())
+                //{
+                //    appDbContext.AppMenuGroups.AddRange(GetAppMenuGroupInitalDataSet());
+                //}
+
+                //if (!appDbContext.AppMenuItems.Any())
+                //{
+                //    appDbContext.AppMenuItems.AddRange(GetAppMenuItemInitalDataSet());
+                //}
+
+                //if (!appDbContext.AppRoleMenuMappings.Any())
+                //{
+                //    appDbContext.AppRoleMenuMappings.AddRange(GetAppRoleMenuMappingInitalDataSet());
+                //}
+
+                //if (!appDbContext.AppUserRoleMappings.Any())
+                //{
+                //    appDbContext.AppUserRoleMappings.AddRange(GetAppUserRoleMappingInitalDataSet());
+                //}
+
+                //if (!appDbContext.AppConfigs.Any())
+                //{
+                //    appDbContext.AppConfigs.AddRange(GetAppConfigInitalDataSet());
+                //}
+
+                //appDbContext.SaveChanges();
+            }
         }
     }
 }

@@ -1,4 +1,9 @@
-﻿using DotnetTemplateWithDotnetIdentity.Api.Constants;
+﻿using DotnetTemplateWithDotnetIdentity.Api.Areas.Identity.Data;
+using DotnetTemplateWithDotnetIdentity.Api.Constants;
+using DotnetTemplateWithDotnetIdentity.Api.Identity;
+using DotnetTemplateWithDotnetIdentity.Data.Util;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotnetTemplateWithDotnetIdentity.Api.AppStart
 {
@@ -32,11 +37,15 @@ namespace DotnetTemplateWithDotnetIdentity.Api.AppStart
 
             app.MapRazorPages();
 
+            app.Services.SeedIdentity();
+            app.Services.SeedAppDatabase();
+
             app.UseMiddleware(typeof(AppLogHandlerMiddleware));
 
             app.MapFallbackToFile("index.html");
-
             app.Run();
+
+            
         }
     }
 }

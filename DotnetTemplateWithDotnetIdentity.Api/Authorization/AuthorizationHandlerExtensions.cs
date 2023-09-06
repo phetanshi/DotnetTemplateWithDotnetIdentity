@@ -9,19 +9,18 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization
     {
         internal static async Task WindowsAuthentication(this AuthorizationHandlerContext context,
                                                                 IAuthorizationRequirement requirement,
-                                                                IUserService employeeService,
-                                                                Func<int, Task<bool>> isAuthorized)
+                                                                Func<string, Task<bool>> isAuthorized)
         {
             if (context == null
-                || employeeService == null
+                || context.User == null
+                || context.User.Identity == null
                 || isAuthorized == null)
             {
                 context.Fail();
                 return;
             }
 
-            var employeeId = await GetEmployeeIdByLoginId(employeeService, context?.User?.Identity?.Name ?? "");
-            bool isAuthZ = await isAuthorized(employeeId);
+            bool isAuthZ = await isAuthorized(""); //TODO : pending windows auth
 
             if (!isAuthZ)
             {
@@ -31,20 +30,19 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization
 
             if (!IsClaimAlreadyExists(context, ClaimHelper.USER_ID_KEY))
             {
-                context.AddAppClaim(ClaimHelper.USER_ID_KEY, employeeId.ToString());
+                context.AddAppClaim(ClaimHelper.USER_ID_KEY, context.User.Identity.Name);
             }
 
             context.Succeed(requirement);
         }
-        internal static async Task AzureAdAuthentication(this AuthorizationHandlerContext context,
+        internal static async Task BearerTokenAuthentication(this AuthorizationHandlerContext context,
                                                                 IAuthorizationRequirement requirement,
-                                                                IUserService employeeService,
-                                                                Func<int, Task<bool>> isAuthorized)
+                                                                IUserService userService,
+                                                                Func<string, Task<bool>> isAuthorized)
         {
             if (context == null
                 || context.User == null
                 || context.User.Claims == null
-                || employeeService == null
                 || isAuthorized == null)
             {
                 context.Fail();
@@ -62,8 +60,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization
 
             string emailId = emailClaim?.Value ?? emailClaimPreferred.Value;
 
-            var employeeId = await GetEmployeeIdByLoginId(employeeService, emailId);
-            bool isAuthZ = await isAuthorized(employeeId);
+            bool isAuthZ = await isAuthorized(emailId);
 
             if (!isAuthZ)
             {
@@ -73,20 +70,14 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization
 
             if (!IsClaimAlreadyExists(context, ClaimHelper.USER_ID_KEY))
             {
-                context.AddAppClaim(ClaimHelper.USER_ID_KEY, employeeId.ToString());
+                var user = await userService.GetAsync(emailId);
+                if (user != null)
+                {
+                    context.AddAppClaim(ClaimHelper.USER_ID_KEY, user.UserId.ToString());
+                }
             }
-
             context.Succeed(requirement);
 
-        }
-
-        private static async Task<int> GetEmployeeIdByLoginId(IUserService employeeService, string loginUserId)
-        {
-            if (string.IsNullOrEmpty(loginUserId) || employeeService == null)
-                return 0;
-
-            var emp = await employeeService.GetAsync(loginUserId);
-            return emp?.UserId ?? 0;
         }
 
         private static bool IsClaimAlreadyExists(AuthorizationHandlerContext context, string claimKey)

@@ -16,7 +16,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Authorization
                 Claim employeeIdClaim = context.User.Claims.FirstOrDefault(x => x.Type == USER_ID_KEY);
                 if (employeeIdClaim != null)
                 {
-                    employeeId = Convert.ToInt32(string.IsNullOrEmpty(employeeIdClaim.Value) ? 0 : employeeIdClaim.Value);
+                    Int32.TryParse(employeeIdClaim.Value, out employeeId);
                 }
             }
             return employeeId;

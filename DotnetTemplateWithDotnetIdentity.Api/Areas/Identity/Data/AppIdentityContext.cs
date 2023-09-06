@@ -1,4 +1,5 @@
 ﻿using DotnetTemplateWithDotnetIdentity.Api.Areas.Identity.Data;
+using DotnetTemplateWithDotnetIdentity.Data.Util;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
