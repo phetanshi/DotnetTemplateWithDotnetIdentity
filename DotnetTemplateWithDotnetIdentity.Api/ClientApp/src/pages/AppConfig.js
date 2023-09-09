@@ -11,35 +11,69 @@ import {
     Row,
     Col
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { CodeOutlined, PlusOutlined } from "@ant-design/icons";
 import { BASE_URI, API_URI } from "../config";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { objectToQueryString } from "../util/utility";
+import { getApiData, postData, putData } from "../components/api-services/fetchHelpers";
 
 const { Search } = Input;
 
 const getData = async (setAppData, isActive) => {
+    let url = `${BASE_URI}${API_URI.AppConfigBase}`
+    let data = await getApiData(url);
+    let filteredData = data.payload.filter((item) => item.isActive === isActive).map((row) => ({
+        configId: row.configId,
+        configKey: row.configKey,
+        configValue: row.configValue,
+        isActive: row.isActive
+    }));
+    console.log("AppConfig Filtered Data : ", filteredData);
+    setAppData(filteredData);
+}
 
-    await Axios.get(BASE_URI + "/api/Admin/getAsync")
-        .then((res) => {
-            console.log(res.data.payload);
-            setAppData(
-                res.data.payload.filter((item) => item.isActive === isActive).map((row) => ({
-                    configId: row.configId,
-                    configKey: row.configKey,
-                    configValue: row.configValue,
-                    isActive: row.isActive
+const SearchAppConfig = async (setAppData, obj) => {
+    let qryStr = objectToQueryString(obj);
+    console.log("qryStr : ", qryStr);
+    let url = `${BASE_URI}${API_URI.AppConfigBase}${API_URI.AppConfigSearch}?${qryStr}`;
+    let data = await getApiData(url);
 
-                }))
-            );
-
-        })
-        .catch((e) => console.log(e));
+    if (!!data)
+    {
+        setAppData(
+            data.payload.map((row) => ({
+                configId: row.configId,
+                configKey: row.configKey,
+                configValue: row.configValue,
+                isActive: row.isActive,
+            }))
+        );
+    }
 };
+
+const updateOrDeleteAppConfig = async (url, appData) => {
+    let response = await putData(url, appData);
+    console.log("updateOrDeleteAppConfig response : ", response);
+};
+
+const addConfigItem = async (url, configKey, configValue) => {
+    let data = {
+        configKey: configKey,
+        configValue: configValue,
+    };
+    let response = await postData(url, data);
+    console.log("Response Data : ", response);
+};
+
+const getConfigTableRowKey = (configItem) => {
+    console.log("Row Data : ", configItem);
+    return configItem.configKey;
+}
 
 export function AppConfig() {
     let objDefault = { id: 0, key: "", value: "", isActive: false };
+    let appConfigBaseUrl = `${BASE_URI}${API_URI.AppConfigBase}`;
     
     const [appData, setAppData] = useState([]);
     const [selectedConifgItem, setSelectedConfigItem] = useState(objDefault);
@@ -53,8 +87,10 @@ export function AppConfig() {
     const [addCount, setAddCount] = useState(1);
     const [isActive, setIsActive] = useState(true);
     const [id, setId] = useState();
-
     const [checked, setChecked] = useState(true);
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+
     const onChange = (e) => {
         setChecked(e.target.checked);
         setIsActive(e.target.checked);
@@ -65,9 +101,9 @@ export function AppConfig() {
         setIsAddModalOpen(true);
     };
     const handleAddOk = () => {
-        postData(configKey, configValue);
+        addConfigItem(appConfigBaseUrl, configKey, configValue);
         setIsAddModalOpen(false);
-        getData();
+        getData(setAppData);
         setconfigKey();
         setAddCount(addCount + 1);
     };
@@ -83,7 +119,15 @@ export function AppConfig() {
         
     };
     const handleEditOk = () => {
-        putDataDestructured(selectedConifgItem);
+        let editObj = {
+            configKey: selectedConifgItem.key,
+            configValue: selectedConifgItem.value,
+            configId: selectedConifgItem.id,
+            isActive: selectedConifgItem.isActive,
+        }
+        updateOrDeleteAppConfig(appConfigBaseUrl, editObj);
+
+
         setIsEditModalOpen(false);
         setAddCount(addCount + 1);
         setconfigKey(objDefault);
@@ -99,60 +143,6 @@ export function AppConfig() {
         getData(setAppData, isActive);
     }, [getData]);
 
-    
-    
-   
-    const SearchAppConfig = async (searchString) => {
-        let qryStr = objectToQueryString({ SearchString: searchString, IsActive: isActive })
-        console.log("qryStr : ", qryStr);
-        await Axios.get(`${BASE_URI}/api/Admin/appconfig/search?${qryStr}`)
-            .then((res) => {
-                console.log(res);
-                setAppData(
-                    res.data.payload.map((row) => ({
-                        configId: row.configId,
-                        configKey: row.configKey,
-                        configValue: row.configValue,
-                        isActive: row.isActive,
-                    }))
-                );
-            })
-            .catch((e) => console.log(e));
-    };
-
-    const putData = async (appData) => {
-        await Axios.put(BASE_URI + "/api/Admin/appconfig/", appData, {
-            headers: { "Content-Type": "application/json" },
-        }).then((res) => {
-            console.log(res);
-        });
-    };
-
-    const putDataDestructured = async (configItem) => {
-        await Axios.put(
-            BASE_URI + "/api/Admin/appconfig/",
-            {
-                configKey: configItem.key,
-                configValue: configItem.value,
-                configId: configItem.id,
-                isActive: configItem.isActive,
-            },
-            {
-                headers: { "Content-Type": "application/json" },
-            }
-        ).then((res) => {
-            console.log(res);
-        }).catch((e) => alert("please enter all the fields"));
-    };
-
-    const postData = async (configKey, configValue) => {
-        await Axios.post(BASE_URI + "/api/Admin/appconfig/", {
-            configKey: configKey,
-            configValue: configValue,
-        }).then((res) => {
-            console.log(res);
-        });
-    };
     const columns = [
         {
             title: "Id",
@@ -227,7 +217,7 @@ export function AppConfig() {
                         title="Sure to delete?"
                         onConfirm={() => {
                             row.isActive = false;
-                            putData(row);
+                            updateOrDeleteAppConfig(appConfigBaseUrl, row);
                             setAddCount(addCount + 1);
                         }}
                     >
@@ -239,11 +229,11 @@ export function AppConfig() {
        
     ];
 
-    const [tablecolumn, settableColumn]= useState(columns) 
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
-    const handleSearch = (e) => {
-        SearchAppConfig(e)
+    const [tablecolumn, settableColumn] = useState(columns);
+    
+    const handleSearch = (searchTem) => {
+        let obj = { SearchString: searchTem, IsActive: isActive };
+        SearchAppConfig(setAppData, obj);
         //setSearchText(e.toLowerCase);
         //setSearchedColumn(dataIndex);
       };
@@ -254,12 +244,8 @@ export function AppConfig() {
         setSearchText('');
       };
 
-    //   const onSearch=()={
-
-    //   }
-
     return (
-        <ConfigProvider>
+        <>
             <div
                 style={{
                     display: "inline-block",
@@ -327,7 +313,7 @@ export function AppConfig() {
                     <Search
                         placeholder="input search text"
                         allowClear
-                        onSearch={(e)=>handleSearch(e)}
+                        onSearch={handleSearch}
                         style={{
                             width: "15vw",
                             marginTop: "2vh",
@@ -393,7 +379,7 @@ export function AppConfig() {
                 </Row> 
             </Modal>
 
-            <Table columns={tablecolumn} dataSource={appData} pagination />
-        </ConfigProvider>
+            <Table columns={tablecolumn} dataSource={appData} pagination rowKey={getConfigTableRowKey} />
+        </>
     );
 }

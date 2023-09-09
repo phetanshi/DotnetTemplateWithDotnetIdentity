@@ -24,7 +24,17 @@ export const getApiData = async (url) => {
     }
 }
 
-export const postDataToApi = async (url, data) => {
+export const postData = async (url, data) => {
+    let response = await sendData(url, data, "POST");
+    return response;
+}
+
+export const putData = async (url, data) => {
+    let reponse = await sendData(url, data, "PUT");
+    return reponse;
+}
+
+const sendData = async (url, data, method) => {
     try {
 
         const token = await authService.getAccessToken();
@@ -34,8 +44,7 @@ export const postDataToApi = async (url, data) => {
             const bearer = `Bearer ${token}`;
             headers.append("Authorization", bearer);
         }
-        if (!!data)
-        {
+        if (!!data) {
             headers.append('Content-Type', 'application/json')
         }
         let options = {

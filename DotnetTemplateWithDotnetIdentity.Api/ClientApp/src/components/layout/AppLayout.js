@@ -133,7 +133,7 @@ export const AppLayout = (props) => {
                 marginTop: "1vh",
                 }}
                 >
-          &#169; Developed by Padmasekhar!
+          &#169; Developed by Team!
         </footer>
           {/* </Layout> */}
         </Layout>

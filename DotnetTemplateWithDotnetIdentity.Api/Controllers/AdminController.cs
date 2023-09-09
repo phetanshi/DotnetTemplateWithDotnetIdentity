@@ -18,7 +18,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             this._appConfigService = appConfigService;
         }
 
-        [HttpGet("getAsync", Name = "GetAppConfig")]
+        [HttpGet("appconfig", Name = "GetAppConfig")]
         //[Authorize(Policy = AppPolicies.SUPPORT)]
         public async Task<IActionResult> GetAppConfig()
         {
@@ -38,6 +38,17 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             return OkDone(appConfig);
         }
 
+        [HttpGet("appconfig/search", Name = "SearchAppConfig")]
+        public async Task<IActionResult> SearchAppConfig([FromQuery] SearchAppConfigDto filters)
+        {
+            var matchedConfigs = await _appConfigService.SearchAsync(filters);
+            if (matchedConfigs == null)
+            {
+                return ObjectNotFound();
+            }
+            return OkDone(matchedConfigs);
+        }
+
         [HttpPost("appconfig", Name = "createappconfig")]
         //[authorize(policy = apppolicies.admin)]
         public async Task<IActionResult> createappconfig(AppConfigCreateDto appconfig)
@@ -49,6 +60,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             }
             return OkDone(appconfigdto);
         }
+        
         [HttpPut("appconfig", Name = "UpdateAppConfig")]
         //[Authorize(Policy = AppPolicies.ADMIN)]
         public async Task<IActionResult> UpdateAppConfig(AppConfigDto appConfig)
@@ -73,16 +85,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             return OkDone(isDeleted);
         }
 
-        [HttpGet("appconfig/search", Name = "SearchAppConfig")]
-        public async Task<IActionResult> SearchAppConfig([FromQuery] SearchAppConfigDto filters)
-        {
-            var matchedConfigs = await _appConfigService.SearchAsync(filters);
-            if (matchedConfigs == null)
-            {
-                return ObjectNotFound();
-            }
-            return OkDone(matchedConfigs);
-        }
+        
     }
 }
 

@@ -4,9 +4,9 @@ using DotnetTemplateWithDotnetIdentity.Data.Models;
 
 namespace DotnetTemplateWithDotnetIdentity.Api.AutoMapperProfiles
 {
-    public class EmployeeAutoMapperProfile : Profile
+    public class UserAutoMapperProfile : Profile
     {
-        public EmployeeAutoMapperProfile()
+        public UserAutoMapperProfile()
         {
             CreateMap<User, UserReadDto>().ReverseMap();
             CreateMap<UserCreateDto, User>();

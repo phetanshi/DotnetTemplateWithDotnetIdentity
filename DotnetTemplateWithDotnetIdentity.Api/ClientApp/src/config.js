@@ -14,7 +14,9 @@ export const API_URI = {
     Users: '/api/User',
     ActivityLogs: '/api/Logger',
     ErrorLogs: '/api/Logger/error',
-    AppMenu: '/api/AppMenu'
+    AppMenu: '/api/AppMenu',
+    AppConfigBase: '/api/Admin/appconfig',
+    AppConfigSearch: '/search',
 }
 
 export const USER_ROLE = {
@@ -33,7 +35,7 @@ export const QUERY_STRINGS = {
 }
 
 export const USER_SETTINGS = {
-    theme: USER_THEMES.Dark
+    theme: USER_THEMES.Light
 }
 
 export const MESSAGES = {
