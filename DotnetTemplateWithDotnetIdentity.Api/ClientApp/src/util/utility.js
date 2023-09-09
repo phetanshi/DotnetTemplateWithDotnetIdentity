@@ -37,3 +37,10 @@ export const getData = async (url, setData) => {
         setData(data.payload);
     }
 }
+
+export function objectToQueryString(obj) {
+    let str = Object.keys(obj).map(function (key) {
+        return key + '=' + obj[key];
+    }).join('&');
+    return str;
+}

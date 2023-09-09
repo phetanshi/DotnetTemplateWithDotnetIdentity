@@ -15,12 +15,32 @@ import { PlusOutlined } from "@ant-design/icons";
 import { BASE_URI, API_URI } from "../config";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { objectToQueryString } from "../util/utility";
 
 const { Search } = Input;
 
+const getData = async (setAppData, isActive) => {
+
+    await Axios.get(BASE_URI + "/api/Admin/getAsync")
+        .then((res) => {
+            console.log(res.data.payload);
+            setAppData(
+                res.data.payload.filter((item) => item.isActive === isActive).map((row) => ({
+                    configId: row.configId,
+                    configKey: row.configKey,
+                    configValue: row.configValue,
+                    isActive: row.isActive
+
+                }))
+            );
+
+        })
+        .catch((e) => console.log(e));
+};
+
 export function AppConfig() {
     let objDefault = { id: 0, key: "", value: "", isActive: false };
-    console.log(BASE_URI)
+    
     const [appData, setAppData] = useState([]);
     const [selectedConifgItem, setSelectedConfigItem] = useState(objDefault);
   
@@ -31,12 +51,13 @@ export function AppConfig() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [addCount, setAddCount] = useState(1);
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(true);
     const [id, setId] = useState();
 
     const [checked, setChecked] = useState(true);
     const onChange = (e) => {
         setChecked(e.target.checked);
+        setIsActive(e.target.checked);
         setAddCount(addCount + 1);
         settableColumn(e.target.checked? columns2:columns)
     };
@@ -75,35 +96,18 @@ export function AppConfig() {
     };
 
     useEffect(() => {
-        getData();
-       
-        
-    }, [addCount]);
+        getData(setAppData, isActive);
+    }, [getData]);
 
     
-    const getData = async () => {
-  
-        await Axios.get(BASE_URI + "/api/Admin/getAsync")
-            .then((res) => {
-                console.log(res.data.payload);
-                setAppData(
-                    
-                    res.data.payload.filter((item) => item.isActive === checked).map((row) => ({
-                        configId: row.configId,
-                        configKey: row.configKey,
-                        configValue: row.configValue,
-                        isActive: row.isActive
-                        
-                    }))
-                );
-               
-            })
-            .catch((e) => console.log(e));
-    };
+    
    
     const SearchAppConfig = async (searchString) => {
-        await Axios.post(BASE_URI + "/api/Admin/appconfig/Search",{"searchstring":searchString}, {headers: { "Content-Type": "application/json" }})
+        let qryStr = objectToQueryString({ SearchString: searchString, IsActive: isActive })
+        console.log("qryStr : ", qryStr);
+        await Axios.get(`${BASE_URI}/api/Admin/appconfig/search?${qryStr}`)
             .then((res) => {
+                console.log(res);
                 setAppData(
                     res.data.payload.map((row) => ({
                         configId: row.configId,

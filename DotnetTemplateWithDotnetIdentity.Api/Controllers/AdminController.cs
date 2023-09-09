@@ -73,10 +73,10 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             return OkDone(isDeleted);
         }
 
-        [HttpPost("appconfig/Search", Name = "SearchAppConfig")]
-        public async Task<IActionResult> SearchAppConfig(SearchAppConfigDto searchstring)
+        [HttpGet("appconfig/search", Name = "SearchAppConfig")]
+        public async Task<IActionResult> SearchAppConfig([FromQuery] SearchAppConfigDto filters)
         {
-            var matchedConfigs = await _appConfigService.SearchAsync(searchstring);
+            var matchedConfigs = await _appConfigService.SearchAsync(filters);
             if (matchedConfigs == null)
             {
                 return ObjectNotFound();
