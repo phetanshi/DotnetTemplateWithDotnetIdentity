@@ -10,5 +10,6 @@ namespace Application.Dtos
     {
         public SearchAppConfigDto() { }
         public string SearchString { get; set; }
+        public bool IsActive { get; set; }
     }
 }

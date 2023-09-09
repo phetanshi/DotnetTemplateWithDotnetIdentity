@@ -85,20 +85,24 @@ export function AppConfig() {
   
         await Axios.get(BASE_URI + "/api/Admin/getAsync")
             .then((res) => {
+                console.log(res.data.payload);
                 setAppData(
-                    res.data.payload.map((row) => ({
+                    
+                    res.data.payload.filter((item) => item.isActive === checked).map((row) => ({
                         configId: row.configId,
                         configKey: row.configKey,
                         configValue: row.configValue,
-                        isActive: row.isActive,
+                        isActive: row.isActive
+                        
                     }))
                 );
+               
             })
             .catch((e) => console.log(e));
     };
    
     const SearchAppConfig = async (searchString) => {
-        await Axios.post(BASE_URI + "/api/Admin/appconfig/Search",{searchstring:searchString}, {headers: { "Content-Type": "application/json" }})
+        await Axios.post(BASE_URI + "/api/Admin/appconfig/Search",{"searchstring":searchString}, {headers: { "Content-Type": "application/json" }})
             .then((res) => {
                 setAppData(
                     res.data.payload.map((row) => ({
