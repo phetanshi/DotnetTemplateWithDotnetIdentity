@@ -88,15 +88,16 @@ body {
 }
 
 .ProfileTitleLabelName {
-    color: #828282;
+    /* color: #828282; */
     font-size: "12px";
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    font-weight: bolder;
 }
 
 .ProfileTitleLabelValue {
-    color: #828282;
+    /* color: #828282; */
     font-size: 'h6';
     font-style: normal;
     font-weight: 400;

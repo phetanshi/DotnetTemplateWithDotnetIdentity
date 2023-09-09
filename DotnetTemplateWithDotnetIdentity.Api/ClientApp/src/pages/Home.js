@@ -14,7 +14,7 @@ export const Home = () => {
 
   return (
     <div>
-      <h2>Welcome to the hackthon!</h2>
+      <h2>Welcome to the Hackathon!</h2>
     </div>
   )
 }
