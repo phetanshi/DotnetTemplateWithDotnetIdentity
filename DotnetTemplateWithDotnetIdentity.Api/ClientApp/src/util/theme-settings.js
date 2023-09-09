@@ -13,7 +13,7 @@ export const getDarkThemeSetting = () => {
             "fontSize": 12,
             "colorBgElevated": "#FFFFFF",
             "headerTextColor": "#FFFFFF",
-            "colorBgHeader": '#1C1C1C',
+            "colorBgHeader": "#092e5d"
         }
     }
 }

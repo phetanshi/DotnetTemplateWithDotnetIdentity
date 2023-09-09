@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Layout, Menu, theme, Typography } from 'antd';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from '@ant-design/icons';
+import { Layout, Menu, theme, Typography } from 'antd';
 import { USER_THEMES, BASE_URI, API_URI } from '../../config';
 import { getMenu } from '../../util/utility';
 import { HeaderLayout } from './HeaderLayout';
@@ -38,7 +34,7 @@ export const AppLayout = (props) => {
   const { IsDarkTheme, setIsDarkTheme } = props;
   const [IsAuthn, setIsAuthn] = useState(false);
   const [LoginUser, setLoginUser] = useState(null);
-  const [userName, setuserName] = useState('Guest');
+  const [userName, setuserName] = useState('Gust');
   const [collapsed, setCollapsed] = useState(false);
   const [AppMenu, setAppMenu] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
@@ -73,44 +69,31 @@ export const AppLayout = (props) => {
           userName={userName}
           />
         <Layout>
-        <Button
-          type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-              position:"absolute", zIndex:"2",
-              margin: '1vh'
-          }}
-        />
           <Sider trigger={null} collapsible
-            collapsed={collapsed} collapsedWidth = {0}
+            collapsed={collapsed}
             theme={IsDarkTheme ? 'dark' : 'light'}
-            style={{ position:"relative", zIndex:"1" }}>
+            style={{ background: colorBgContainer }}>
             {/* <div className="logo">
                         <img src={window.location.origin + '/logo512.png'} alt="logo" />
                     </div> */}
             <Menu
-            style={{marginTop: '10vh'}}
               mode="inline"
               defaultSelectedKeys={['/']}
               onClick={({ key }) => {
                 navigate(key);
               }}
-              //openKeys={openKeys}
+              openKeys={openKeys}
               items={AppMenu}
               theme={IsDarkTheme ? 'dark' : 'light'}
-              //style={{ background: colorBgContainer }}
+              style={{ background: colorBgContainer }}
             />
           </Sider>
-          {/* <Layout style={{
+          <Layout style={{
             padding: '0 24px 24px',
-          }}> */}
+          }}>
             <Content
               style={{
-                margin: '50px 50px 50px 70px',
+                margin: '24px 16px',
                 padding: 24,
                 minHeight: 'Calc(100vh - 10em)',
                 background: colorBgContainer,
@@ -118,24 +101,8 @@ export const AppLayout = (props) => {
             >
               {props.children}
             </Content>
-            {/* <Footer style={{ textAlign: 'center' }}>&copy; Developed by Padmasekhar!</Footer> */}
-            <footer
-                style={{
-                position: "fixed",
-                bottom: "0",
-                width: "100vw",
-                backgroundColor: colorBgContainer,
-                alignContent: "space-evenly",
-                paddingLeft: "46vw",
-                paddingRight: "40vw",
-                paddingBottom: "1vh",
-                paddingTop: "1vh",
-                marginTop: "1vh",
-                }}
-                >
-          &#169; Developed by Padmasekhar!
-        </footer>
-          {/* </Layout> */}
+            <Footer style={{ textAlign: 'center' }}>&copy; Developed by Padmasekhar!</Footer>
+          </Layout>
         </Layout>
       </Typography>
     </Layout>

@@ -48,13 +48,29 @@ export const HeaderLayout = (props) => {
           }}
           className='header-content'
       >
+          <div>
+              <Space>
+                  <Button
+                      type="text"
+                      icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                      onClick={() => setCollapsed(!collapsed)}
+                      style={{
+                          fontSize: '16px',
+                          width: 64,
+                          height: 64,
+                          color: headerTextColor
+                      }}
+                  />
+              </Space>
+          </div>
+
           <div className="header-login-content">
               <Space>
                   <div style={{ paddingRight: '8px' }}>
                       <Switch size="small" checked={IsDarkTheme} checkedChildren={USER_THEMES.Dark}
                           unCheckedChildren={USER_THEMES.Light} onChange={(checked) => setIsDarkTheme(checked)} />
                   </div>
-                  {IsAuthn && userName !== "Guest" &&
+                  {IsAuthn && userName !== "Gust" &&
                       <>
                           <p style={{ color: headerTextColor, marginBottom: "0px" }}>Hello, {userName}!</p>
                       <NavLink replace tag={Link} to={ApplicationPaths.LogOut} state={logoutState}>

@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
 using DotnetTemplateWithDotnetIdentity.Api.Authorization;
 using DotnetTemplateWithDotnetIdentity.Api.Services;
-using DotnetTemplateWithDotnetIdentity.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,8 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             this._appConfigService = appConfigService;
         }
 
-        [HttpGet("getAsync", Name = "GetAppConfig")]
-        //[Authorize(Policy = AppPolicies.SUPPORT)]
+        [HttpGet("appconfig", Name = "GetAppConfig")]
+        [Authorize(Policy = AppPolicies.SUPPORT)]
         public async Task<IActionResult> GetAppConfig()
         {
             var appConfig = await _appConfigService.GetAsync();
@@ -27,7 +26,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
         }
 
         [HttpGet("appconfig/{configKey}", Name = "GetAppConfigByKey")]
-        //[Authorize(Policy = AppPolicies.SUPPORT)]
+        [Authorize(Policy = AppPolicies.SUPPORT)]
         public async Task<IActionResult> GetAppConfigByKey(string configKey)
         {
             var appConfig = await _appConfigService.GetAsync(configKey);
@@ -38,19 +37,19 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             return OkDone(appConfig);
         }
 
-        [HttpPost("appconfig", Name = "createappconfig")]
-        //[authorize(policy = apppolicies.admin)]
-        public async Task<IActionResult> createappconfig(AppConfigCreateDto appconfig)
+        [HttpPost("appconfig", Name = "CreateAppConfig")]
+        [Authorize(Policy = AppPolicies.ADMIN)]
+        public async Task<IActionResult> CreateAppConfig(AppConfigCreateDto appConfig)
         {
-            var appconfigdto = await _appConfigService.CreateAsync(appconfig);
-            if (appconfigdto == null)
+            var appConfigDto = await _appConfigService.CreateAsync(appConfig);
+            if (appConfigDto == null)
             {
                 return InternalServerError();
             }
-            return OkDone(appconfigdto);
+            return OkDone(appConfigDto);
         }
         [HttpPut("appconfig", Name = "UpdateAppConfig")]
-        //[Authorize(Policy = AppPolicies.ADMIN)]
+        [Authorize(Policy = AppPolicies.ADMIN)]
         public async Task<IActionResult> UpdateAppConfig(AppConfigDto appConfig)
         {
             var appConfigDto = await _appConfigService.UpdateAsync(appConfig);
@@ -62,7 +61,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
         }
 
         [HttpDelete("appconfig", Name = "DeleteAppConfig")]
-        //[Authorize(Policy = AppPolicies.ADMIN)]
+        [Authorize(Policy = AppPolicies.ADMIN)]
         public async Task<IActionResult> DeleteAppConfig([FromBody] string configKeyg)
         {
             var isDeleted = await _appConfigService.DeleteAsync(configKeyg);
@@ -72,17 +71,5 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
             }
             return OkDone(isDeleted);
         }
-
-        [HttpPost("appconfig/Search", Name = "SearchAppConfig")]
-        public async Task<IActionResult> SearchAppConfig(SearchAppConfigDto searchstring)
-        {
-            var matchedConfigs = await _appConfigService.SearchAsync(searchstring);
-            if (matchedConfigs == null)
-            {
-                return ObjectNotFound();
-            }
-            return OkDone(matchedConfigs);
-        }
     }
 }
-

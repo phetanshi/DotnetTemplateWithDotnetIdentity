@@ -35,8 +35,7 @@ export const UserDetails = () => {
     <>
       {!!User &&
         <>
-          {/* <div className='Title'>User Details</div> */}
-          <h2 style={{ paddingRight: "1vw" }}>User Details</h2>{" "}
+          <div className='Title'>User Details</div>
           <Card
             style={{
               width: '100%',
@@ -50,8 +49,7 @@ export const UserDetails = () => {
                   hoverable
                   style={{
                     width: 100,
-                      height: 130,
-                      marginRight: '10vh'
+                    height: 130
                   }}
                 cover={<Image src={`${defaultImg}`} style={{ borderRadius: '5px', width: 130, height: 130 }} />}
 
@@ -77,13 +75,13 @@ export const UserDetails = () => {
                   <div className='ProfileTitleLabelValue'>{User.email}</div>
                 </div>
               </div>
-              <Divider type="vertical" style={{ height: '20vh', borderWidth: '2px', marginTop: '10px', marginLeft: '49px' }} />
+              <Divider type="vertical" style={{ height: '20vh', borderWidth: '1px', marginTop: '10px', marginLeft: '49px', borderColor: '#FFFFFF' }} />
               <div>
-                    <p className='ProfileTitleLabelName' style={{ marginLeft:'10vh' }} >Other details</p>
+                <p>Other details</p>
               </div>
             </div>
           </Card>
-          <h3 style={{ paddingRight: "1vw" }}>Summary</h3>{" "}
+          <div className='Title'>Summary</div>
           <Card
             style={{
               width: '100%',
@@ -91,7 +89,7 @@ export const UserDetails = () => {
               marginBottom: '10vh'
             }}
           >
-            <p className='ProfileTitleLabelValue'>Commodo laboris veniam labore ipsum. Ad laboris fugiat qui Lorem anim cupidatat.
+            <p>Commodo laboris veniam labore ipsum. Ad laboris fugiat qui Lorem anim cupidatat.
               Anim aliquip ad consectetur in cillum adipisicing cillum sint ea nisi.
               Excepteur magna aliqua laborum nostrud voluptate ipsum esse irure nulla
               labore adipisicing excepteur ullamco sunt. Irure in elit sit pariatur reprehenderit officia non veniam.</p>

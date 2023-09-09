@@ -11,7 +11,7 @@ import { ConfigProvider } from 'antd';
 
 
 const App = () => {
-  const [IsDarkTheme, setIsDarkTheme] = useState(USER_SETTINGS.theme === USER_THEMES.Light);
+  const [IsDarkTheme, setIsDarkTheme] = useState(USER_SETTINGS.theme === USER_THEMES.Dark);
 
   return(
     <ConfigProvider theme={getUserThemeSetting(IsDarkTheme)}>
