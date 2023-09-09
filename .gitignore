@@ -33,9 +33,6 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-#Custom
-DotnetTemplateWithDotnetIdentity.Api/Hackthon.db*
-DotnetTemplateWithDotnetIdentity.Api/HackthonLogging.db*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -365,3 +362,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DotnetTemplateWithDotnetIdentity.Api/Hackthon.db
+/DotnetTemplateWithDotnetIdentity.Api/Hackthon.db-shm
+/DotnetTemplateWithDotnetIdentity.Api/Hackthon.db-wal
+/DotnetTemplateWithDotnetIdentity.Api/HackthonLogging.db
