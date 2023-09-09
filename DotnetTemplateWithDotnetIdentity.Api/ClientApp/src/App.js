@@ -11,7 +11,7 @@ import { ConfigProvider } from 'antd';
 
 
 const App = () => {
-  const [IsDarkTheme, setIsDarkTheme] = useState(USER_SETTINGS.theme === USER_THEMES.Light);
+  const [IsDarkTheme, setIsDarkTheme] = useState(USER_SETTINGS.theme === USER_THEMES.Dark);
 
   return(
     <ConfigProvider theme={getUserThemeSetting(IsDarkTheme)}>
@@ -28,23 +28,3 @@ const App = () => {
 }
 
 export default App;
-
-// export default class App extends Component {
-//   static displayName = App.name;
-  
-
-//   render() {
-//     return (
-//       <ConfigProvider theme={getUserThemeSetting()}>
-//         <Layout>
-//           <Routes>
-//             {AppRoutes.map((route, index) => {
-//               const { element, requiredRoles, requireAuth, ...rest } = route;
-//               return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} requiredRoles={requiredRoles} element={element} /> : element} />;
-//             })}
-//           </Routes>
-//         </Layout>
-//       </ConfigProvider>
-//     );
-//   }
-// }
