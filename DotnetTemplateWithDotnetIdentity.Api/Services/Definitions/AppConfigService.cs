@@ -24,6 +24,11 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Services.Definitions
             return Mapper.Map<AppConfigDto>(config);
         }
 
+        public async Task<List<AppConfigDto>> SearchAsync(SearchAppConfigDto SearchString)
+        {
+            var config = await Repository.GetListAsync<AppConfig>(x => x.ConfigKey.ToLower() == SearchString.SearchString.ToLower() || x.ConfigValue.ToLower() == SearchString.SearchString.ToLower() || x.ConfigId.ToString() == SearchString.SearchString);
+            return Mapper.Map<List<AppConfigDto>>(config.Distinct());
+        }
         public async Task<AppConfigDto> CreateAsync(AppConfigCreateDto appConfig)
         {
             var config = Mapper.Map<AppConfig>(appConfig);

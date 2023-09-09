@@ -8,7 +8,7 @@ namespace DotnetTemplateWithDotnetIdentity.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = AppPolicies.SUPPORT)]
+    //[Authorize(Policy = AppPolicies.SUPPORT)]
     public class LoggerController : AppBaseController
     {
         private readonly IAppLogService _appLogService;
